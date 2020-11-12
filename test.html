@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+
+
+<body>
+    <svg id="export-me" width='100%' height='350'>
+
+        <g id='rowGroup'>
+            <rect x='5' y='40' width='140' height='240' fill='gainsboro' />
+            <rect x='145' y='15' width='610' height='25' fill='gainsboro' />
+            <rect x='145' y='40' width='615' height='' style="stroke: black;  " />
+            <line x1="145" x2="755" y1="40" y2="40" stroke="black" stroke-width="1" stroke-linecap="butt" />
+            <line x1="145" y1="280" x2="145" y2="40" stroke="black" />
+
+            <line x1="5" y1="280" x2="755" y2="280" stroke="black" stroke-linecap="butt" />
+            <line x1="755" y1="15" x2="755" y2="280" stroke="black" stroke-linecap="butt" />
+
+            <line x1="5" y1="310" x2="820" y2="310" stroke="black" stroke-linecap="butt" />
+            <line x1="820" y1="15" x2="820" y2="310" stroke="black" stroke-linecap="butt" />
+
+
+            <text y='30' font-size='13px' font-weight='bold' text-anchor='middle'>
+                <tspan x='175'>19-25</tspan>
+                <tspan x='215'>26-30</tspan>
+                <tspan x='255'>31-35</tspan>
+                <tspan x='295'>36-40</tspan>
+                <tspan x='335'>41-45</tspan>
+                <tspan x='375'>46-50</tspan>
+                <tspan x='415'>51-55</tspan>
+                <tspan x='455'>56-60</tspan>
+                <tspan x='495'>61-65</tspan>
+                <tspan x='535'>60-70</tspan>
+                <tspan x='575'>76-80</tspan>
+                <tspan x='615'>76-80</tspan>
+                <tspan x='655'>76-80</tspan>
+                <tspan x='695'>76-80</tspan>
+                <tspan x='735'>76-80</tspan>
+            </text>
+
+            <text font-size='13px' text-anchor='middle'>
+                <tspan x='10' y='55' text-anchor='start'>ANTWERPEN</tspan>
+                <tspan x='175'>125</tspan>
+                <tspan x='215'>230</tspan>
+                <tspan x='255'>335</tspan>
+                <tspan x='295'>340</tspan>
+                <tspan x='335'>445</tspan>
+                <tspan x='375'>450</tspan>
+                <tspan x='415'>555</tspan>
+                <tspan x='455'>560</tspan>
+                <tspan x='495'>665</tspan>
+                <tspan x='535'>670</tspan>
+                <tspan x='575'>780</tspan>
+                <tspan x='615'>780</tspan>
+                <tspan x='655'>780</tspan>
+                <tspan x='695'>780</tspan>
+                <tspan x='735'>780</tspan>
+            </text>
+
+            <text x='30' y='30' font-size='13px' text-anchor='middle'>
+                <tspan x='10' y='85' text-anchor='start'>BRABANT-WALLON</tspan>
+                <tspan x='175'>125</tspan>
+                <tspan x='215'>230</tspan>
+                <tspan x='255'>335</tspan>
+                <tspan x='295'>340</tspan>
+                <tspan x='335'>445</tspan>
+                <tspan x='375'>450</tspan>
+                <tspan x='415'>555</tspan>
+                <tspan x='455'>560</tspan>
+                <tspan x='495'>665</tspan>
+                <tspan x='535'>670</tspan>
+                <tspan x='575'>780</tspan>
+                <tspan x='615'>780</tspan>
+                <tspan x='655'>780</tspan>
+                <tspan x='695'>780</tspan>
+                <tspan x='735'>780</tspan>
+            </text>
+
+
+
+            <text font-size='13px' fill="blue" text-anchor='middle'>
+                <tspan x='10' y='300' font-weight='bold' text-anchor='start'>Totaux</tspan>
+                <tspan x='175'>125</tspan>
+                <tspan x='215'>230</tspan>
+                <tspan x='255'>335</tspan>
+                <tspan x='295'>340</tspan>
+                <tspan x='335'>445</tspan>
+                <tspan x='375'>450</tspan>
+                <tspan x='415'>555</tspan>
+                <tspan x='455'>560</tspan>
+                <tspan x='495'>665</tspan>
+                <tspan x='535'>670</tspan>
+                <tspan x='575'>780</tspan>
+                <tspan x='615'>780</tspan>
+                <tspan x='655'>780</tspan>
+                <tspan x='695'>780</tspan>
+                <tspan x='735'>780</tspan>
+            </text>
+
+            <text x='775' y='30' font-size='13px' fill="blue" text-anchor='middle'>
+                <tspan x="770" y='30' font-weight='bold' text-anchor='start'>Totaux</tspan>
+                <tspan x="790" y='55'>125</tspan>
+                <tspan x="790" y='85'>230</tspan>
+
+            </text>
+
+        </g>
+
+
+
+
+    </svg>
+
+    <!-- <button onclick="exportPNG();">Export</button> -->
+    <button>download png</button>
+    <div id="crowbar-workspace">
+    </div>
+    <canvas id="canvas" width="800" height="400"></canvas>
+    <div id="png-container"></div>
+
+    <style type="text/css"></style>
+    <script type="text/javascript"></script>
+
+    <script src="./index.js"></script>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.10/d3.min.js"></script>
+<script type="text/javascript" src="svg-crowbar-export.js"></script>
+<script>
+    d3.select("button").on("click", download_png)
+    function download_png() {
+
+        // this is a shitty hack that should probably be embedded in the
+        // svg_crowbar function
+        var svg_el = d3.select("svg")
+            .attr("version", 1.1)
+            .attr("xmlns", "http://www.w3.org/2000/svg")
+            .node();
+
+        // this is the main thing that does the work
+        svg_crowbar(d3.select("#export-me").node(), {
+            filename: "export-me.png",
+            width: 100,
+            height: 100,
+            crowbar_el: d3.select("#crowbar-workspace").node(),
+        })
+    }
+</script>
+
+</html>
